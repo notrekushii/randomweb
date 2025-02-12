@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <script src="./code.js"></script>
+        <script src="./code.js" type="module"></script>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="stylesheet" href="./s.css">
         <title>rekushii.rbxm</title>
+        <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/11.3.1/firebase-firestore-compat.js"></script>
     </head>
     <body>
         <h1 id="web_title">Generate Preview Code</h1>
         <div id="main_input_area">
             <form>
-                <input type="text" id="roblox_id" name="roblox_id" size="150">
-                <input type="submit" id="roblox_id_button" value="Generate">
+                <input type="text" id="roblox_id" name="roblox_id" size="150" placeholder="ROBLOX USER ID">
+                <button type="button" id="roblox_id_button">Generate</button>
             </form>
         </div>
     </body>

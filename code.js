@@ -1,6 +1,15 @@
-const queryString = window.location.search;
-const urlParams = new URLSearchParams(queryString);
-const ROBLOX_ID_INPUT = urlParams.get('roblox_id');
+const firebaseConfig = {
+    apiKey: "AIzaSyCVkcwgS7vz9YnPOIqsmOP5xkS-ctOYZpY",
+    authDomain: "random-game-b4568.firebaseapp.com",
+    projectId: "random-game-b4568",
+    storageBucket: "random-game-b4568.firebasestorage.app",
+    messagingSenderId: "607077515672",
+    appId: "1:607077515672:web:072d0652af1dc54852ebed",
+    measurementId: "G-SGEBPN0R09"
+};
+
+const app = window.firebase.initializeApp(firebaseConfig);
+const db = window.firebase.firestore();
 
 var jsonObj = {
     code: "",
@@ -22,19 +31,24 @@ function generateRandomString(length) {
 
 window.addEventListener("DOMContentLoaded", (l) => {
     const GENERATE_BUTTON = document.getElementById('roblox_id_button');
+    const ROBLOX_ID_INPUT = document.getElementById('roblox_id');
 
-    GENERATE_BUTTON.addEventListener('submit', function (event) {
-        console.log('pressed');
-    
+    GENERATE_BUTTON.onclick = function() {
         var code = generateRandomString(6);
-        var expires = Math.floor(Date.now() / 1000) + 604800;
-        jsonObj.code = code;
-        jsonObj.expires = expires;
-        jsonObj.roblox_id = ROBLOX_ID_INPUT;
-    
-        const JSON_TO_PARSE = JSON.stringify(jsonObj);
-        localStorage.setItem(JSON_TO_PARSE);
+        var expires = (Math.floor(Date.now() / 1000)) + 604800
 
-        event.preventDefault();
-    });
+        console.log(ROBLOX_ID_INPUT.value);
+        
+        db.collection("data_rbx").add({
+            userId: parseInt(ROBLOX_ID_INPUT.value),
+            code: code,
+            expires: expires
+        })
+        .then((docRef) => {
+            console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+    }
 });

@@ -93,3 +93,7 @@ html, body {
 
     font-weight: bolder;
 }
+
+#roblox_id_button:hover {
+    cursor: pointer;
+}
